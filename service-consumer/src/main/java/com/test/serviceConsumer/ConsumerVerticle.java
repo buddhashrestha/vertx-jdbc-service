@@ -68,7 +68,7 @@ public class ConsumerVerticle extends AbstractVerticle {
                 .end(Json.encodePrettily(new JsonObject().put("message","got request!")));
         DbService dbService = DbService.createProxy(vertx, "vertx.Database");
         JsonObject databaseConfig = new JsonObject();
-        databaseConfig.put("url", "jdbc:mysql://localhost:3306/namche")
+        databaseConfig.put("url", "jdbc:mysql://localhost:3306/myDb")
                 .put("driver_class", "com.mysql.jdbc.Driver")
                 .put("max_pool_size", 30)
                 .put("user", "root")
