@@ -58,7 +58,7 @@ public class ConsumerVerticle extends AbstractVerticle {
         DeploymentOptions options = new DeploymentOptions();
         options.setWorker(true);
         options.setConfig(vertx.getOrCreateContext().config());
-        vertx.deployVerticle("com.test.db.DbServiceVerticle", new DeploymentOptions().setWorker(true).setInstances(4));
+//        vertx.deployVerticle("com.test.db.DbServiceVerticle", new DeploymentOptions().setWorker(true).setInstances(4));
         vertx.deployVerticle("com.test.db.DbServiceVerticle");
     }
 
