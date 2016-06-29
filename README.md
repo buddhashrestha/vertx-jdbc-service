@@ -10,5 +10,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sleeping`()
 BEGIN
 
 select SLEEP(30);
+
 select * from anytableName;
+
 END
