@@ -9,6 +9,6 @@ BTW, my sample procedure was just a sleeping procedure :
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sleeping`()
 BEGIN
 
-select SLEEP(30);
-select * from anytableName;
+select SLEEP(30);\n
+select * from anytableName;\n
 END
