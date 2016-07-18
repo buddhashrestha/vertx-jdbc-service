@@ -4,7 +4,7 @@ package com.test.db;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Created by mohbaskota on 12/11/14.
+ * Created by budshrestha on 12/11/14.
  */
 public class Response {
 
