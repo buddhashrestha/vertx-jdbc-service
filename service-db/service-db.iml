@@ -12,26 +12,32 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-jdbc-client:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-sql-common:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.1" level="project" />
-    <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.10" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-jdbc-client:3.3.0.CR1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-sql-common:3.3.0.CR1" level="project" />
+    <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.2" level="project" />
+    <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.11" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.37" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-common:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.0.31.Final" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-service-factory:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-service-proxy:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-lang-js:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-codegen:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.mvel:mvel2:2.2.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.3.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-http2:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver-dns:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-dns:4.1.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-service-factory:3.3.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-service-proxy:3.3.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-lang-js:3.3.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-codegen:3.3.0.CR2" level="project" />
+    <orderEntry type="library" name="Maven: org.mvel:mvel2:2.2.8.Final" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>

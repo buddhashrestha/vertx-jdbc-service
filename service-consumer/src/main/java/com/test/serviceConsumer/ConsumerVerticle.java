@@ -4,10 +4,14 @@ package com.test.serviceConsumer;
 
 import com.test.db.DbService;
 
+import Utils.Holder;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
@@ -58,7 +62,8 @@ public class ConsumerVerticle extends AbstractVerticle {
         DeploymentOptions options = new DeploymentOptions();
         options.setWorker(true);
         options.setConfig(vertx.getOrCreateContext().config());
-//        vertx.deployVerticle("com.test.db.DbServiceVerticle", new DeploymentOptions().setWorker(true).setInstances(4));
+//        vertx.deployVerticle("com.test.db.DbServiceVerticle", new DeploymentOptions().setWorker(true).setWorkerPoolName("dedicated").setInstances(1)
+//        .setMaxWorkerExecuteTime(1000*100));
         vertx.deployVerticle("com.test.db.DbServiceVerticle");
     }
 
@@ -68,16 +73,31 @@ public class ConsumerVerticle extends AbstractVerticle {
                 .end(Json.encodePrettily(new JsonObject().put("message","got request!")));
         DbService dbService = DbService.createProxy(vertx, "vertx.Database");
         JsonObject databaseConfig = new JsonObject();
-        databaseConfig.put("url", "jdbc:mysql://localhost:3306/myDb")
+        databaseConfig.put("url", "jdbc:mysql://localhost:3306/namche")
                 .put("driver_class", "com.mysql.jdbc.Driver")
                 .put("max_pool_size", 30)
                 .put("user", "root")
                 .put("password", "root");
         dbService.storedProc("sleeping()", databaseConfig, result -> {
             if (result.succeeded())
-                System.out.println("Completed!!");
+                System.out.println("Completed!!"+ System.currentTimeMillis());
             else
                 System.out.println("Failed!!");
         });
+        JsonObject status = new JsonObject().put("status", "Completed");
+        restRequest(status,postReq->{
+            System.out.println("Successfully posted status.");
+        });
+    }
+
+    private void restRequest(JsonObject requestBody, Handler<AsyncResult> syncher) {
+        HttpClient apiClient = Holder.getInstance().getApiClient();
+        apiClient.post(8080,
+                       "192.169.1.3",
+                       "api/post", response -> {
+                    logger.info("Received response for statusPost Url with status code " + response.statusCode());
+                    syncher.handle(null);//since we donot have lambda in this handler.
+                }).putHeader("content-type", "text/plain")
+                .end(Json.encodePrettily(requestBody));
     }
 }

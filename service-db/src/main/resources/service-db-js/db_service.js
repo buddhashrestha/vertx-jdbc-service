@@ -41,7 +41,7 @@ var DbService = function(j_val) {
    */
   this.storedProc = function(procName, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["storedProc(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](procName, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
@@ -61,7 +61,7 @@ var DbService = function(j_val) {
    */
   this.createStm = function(query, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["createStm(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](query, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
@@ -81,7 +81,7 @@ var DbService = function(j_val) {
    */
   this.update = function(query, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["update(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](query, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
@@ -101,7 +101,7 @@ var DbService = function(j_val) {
    */
   this.delete = function(query, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["delete(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](query, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
@@ -121,7 +121,7 @@ var DbService = function(j_val) {
    */
   this.read = function(query, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["read(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](query, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
@@ -141,7 +141,7 @@ var DbService = function(j_val) {
    */
   this.nonSharedRead = function(query, databaseConfig, resultHandler) {
     var __args = arguments;
-    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'object' && typeof __args[2] === 'function') {
+    if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_dbService["nonSharedRead(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](query, utils.convParamJsonObject(databaseConfig), function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnJson(ar.result()), null);
