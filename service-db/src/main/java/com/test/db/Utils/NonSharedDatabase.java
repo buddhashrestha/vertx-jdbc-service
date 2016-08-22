@@ -16,9 +16,9 @@ import io.vertx.ext.sql.SQLConnection;
  */
 public class NonSharedDatabase {
     public static void execute(String sql, JsonObject databaseConfig, Handler<AsyncResult<JsonObject>> done) throws RuntimeException {
-        System.out.println("proc execute thread : " + Thread.currentThread()+Thread.currentThread().getId());
-        JDBCClient client1 = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
-        client1.getConnection(connect -> {
+
+        JDBCClient client = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
+        client.getConnection(connect -> {
             if (connect.failed())
                 done.handle(Future.failedFuture(connect.cause()));
 
@@ -47,6 +47,7 @@ public class NonSharedDatabase {
                         done.handle(Future.succeededFuture(new JsonObject().put("message", "Sucessfully executed")));
 
                     connection.close(close -> {
+                        client.close();
                         if (close.failed()) {
                             throw new RuntimeException(close.cause());
                         }
@@ -57,9 +58,9 @@ public class NonSharedDatabase {
     }
 
     public static void call(String sql, JsonObject databaseConfig, Handler<AsyncResult<JsonObject>> done) throws RuntimeException {
-        System.out.println("proc execute thread : " + Thread.currentThread()+Thread.currentThread().getId());
-        JDBCClient client1 = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
-        client1.getConnection(connect -> {
+
+        JDBCClient client = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
+        client.getConnection(connect -> {
             if (connect.failed())
                 done.handle(Future.failedFuture(connect.cause()));
 
@@ -74,6 +75,7 @@ public class NonSharedDatabase {
                     done.handle(Future.failedFuture(result.cause()));
 
                 connection.close(kil -> {
+                    client.close();
                     if (kil.failed()) {
                         throw new RuntimeException(kil.cause());
                     }
@@ -84,8 +86,8 @@ public class NonSharedDatabase {
 
     public static void query(String sql, JsonObject databaseConfig, Handler<AsyncResult<JsonObject>> done) throws RuntimeException {
 
-        JDBCClient client1 = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
-        client1.getConnection(connect -> {
+        JDBCClient client = JDBCClient.createNonShared(Holder.getInstance().getVertx(), databaseConfig);
+        client.getConnection(connect -> {
             if (connect.failed())
                 done.handle(Future.failedFuture(connect.cause()));
 
@@ -100,6 +102,7 @@ public class NonSharedDatabase {
                     done.handle(Future.failedFuture(result.cause()));
 
                 connection.close(kil -> {
+                    client.close();
                     if (kil.failed()) {
                         throw new RuntimeException(kil.cause());
                     }
