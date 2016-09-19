@@ -3,8 +3,10 @@ package com.test.serviceConsumer;
 
 
 import com.test.db.DbService;
+import com.test.db.DbServiceVerticle;
 
 import Utils.Holder;
+import Utils.Runner;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.DeploymentOptions;
@@ -25,6 +27,13 @@ import io.vertx.ext.web.RoutingContext;
 public class ConsumerVerticle extends AbstractVerticle {
 
     Logger logger = LoggerFactory.getLogger(ConsumerVerticle.class);
+
+    public static void main(String[] args) {
+        Runner.runExample(ConsumerVerticle.class);
+        Runner.runExample(DbServiceVerticle.class);
+
+    }
+
 
     @Override
     public void start(Future<Void> fut) {
