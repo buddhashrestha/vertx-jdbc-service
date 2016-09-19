@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <vertx.version>3.3.0.CR2</vertx.version>
+        <vertx.version>3.3.2</vertx.version>
         <!-- must be set in each sub-project -->
         <main.verticle/>
     </properties>
