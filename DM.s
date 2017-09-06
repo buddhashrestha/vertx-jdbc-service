@@ -57,10 +57,10 @@ enterAndCompare:
     bl printf                        /* call to printf */
 
     ldr r9,=buffer /
-    ldrb r1, [r9, #81]
-    ldrb r2, [r9, #81]
+    ldr r3, [r9, #81]
+    ldr r4, [r9, #81]
     mov r5,#81
-    cmp r1, r2
+    cmp r3, r4
 
     beq quater
 
