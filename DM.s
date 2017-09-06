@@ -60,9 +60,7 @@ enterAndCompare:
     ldr r3, [r9, #81]
     ldr r4, [r9, #81]
     mov r5,#81
-    cmp r3, r4
-
-
+    cmp r5,#81
     beq quater
 
 
