@@ -54,6 +54,7 @@ enterAndCompare:
     ldr r6, [r6]
     cmp r6, #81
     beq quater
+    b end
 
 
 end:
