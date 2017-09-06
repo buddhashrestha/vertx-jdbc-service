@@ -70,7 +70,7 @@ str: .word 0
 
 main:
 
-push {ip, lr} @Used with pop at end of main, for ease in returning
+@push {ip, lr} @Used with pop at end of main, for ease in returning
 
     ldr r0, =instr4                             /*Printing the welcome message */
     bl printf                                       
@@ -246,7 +246,7 @@ dietcoke:                                       /*Selection is Diet Coke and ret
 mellow_yellow:                                  /*Selection is Mellow Yellow and return change*/
     ldr r0, =mellow_yellow_instr
     bl printf
-    sub r8,r8,#55s
+    sub r8,r8,#55
     ldr r0, =print_return 
     mov r1,r8
     bl printf
@@ -254,4 +254,4 @@ mellow_yellow:                                  /*Selection is Mellow Yellow and
 
 
 end:
-pop {ip, pc} @Used with push at start of Main, allowing program to end.
+@pop {ip, pc} @Used with push at start of Main, allowing program to end.
