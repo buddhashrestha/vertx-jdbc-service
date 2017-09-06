@@ -20,6 +20,8 @@ number_read: .word 0
 .balign 4
 return: .word 0
 
+.balign 4
+buffer: .zero 10 // set up initialized space
 .text
 
 .global main
@@ -54,8 +56,11 @@ enterAndCompare:
     ldr r1, [r1]                     /* r1 ? *r1 */
     bl printf                        /* call to printf */
 
+    ldr r9,=buffer /
+    ldrb r1, [r9, #81]
+    ldrb r2, [r9, #81]
     mov r5,#81
-    cmp r1, r5
+    cmp r1, r2
 
     beq quater
 
