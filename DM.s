@@ -39,7 +39,7 @@ main:
 
     ldr r0, address_of_message1      /* r0 ? &message1 */
     bl printf                        /* call to printf */
-    mov r2,#0
+    mov r9,#0
     b enterAndCompare
 
 
@@ -48,13 +48,13 @@ quater:
     ldr r1, address_of_number_read   /* r1 ? &number_read */
     ldr r1, [r1]                     /* r1 ? *r1 */
     bl printf                        /* call to printf */
-    add r2,r2, #25
-    cmp r2, #55
+    add r9,r9, #25
+    cmp r9, #55
     bmi enterAndCompare
     b process
 
 process:
-    cmp r2, #55
+    cmp r9, #55
     bne returnChange
     ldr r0, address_of_message3      /* r0 ? &message2 */
     mov r1, #0   
@@ -62,9 +62,11 @@ process:
     b end
 
 returnChange:
-    sub r2,#55
+    sub r9, r9,#55
+    str r9, [sp]
+
     ldr r0, address_of_message3      /* r0 ? &message2 */
-    ldr r1, r2   
+    ldr r1, [sp]   
     bl printf
     b end
 
