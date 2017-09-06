@@ -92,6 +92,7 @@ end:
     bx lr                            /* return from main using lr */
 address_of_message1 : .word message1
 address_of_message2 : .word message2
+address_of_message3 : .word message3
 address_of_scan_pattern : .word scan_pattern
 address_of_number_read : .word number_read
 address_of_return : .word return
