@@ -42,7 +42,7 @@ main:
 
     ldr r0, address_of_message1      /* r0 ? &message1 */
     bl printf                        /* call to printf */
-    ldr r9,=init_value
+    mov r9,#0
     b enterAndCompare
 
 
