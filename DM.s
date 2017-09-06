@@ -27,6 +27,9 @@ return_change_pattern : .asciz "%d"
 number_read: .word 0
 
 .balign 4
+init_value: .word 0
+
+.balign 4
 return: .word 0
 
 
@@ -39,7 +42,7 @@ main:
 
     ldr r0, address_of_message1      /* r0 ? &message1 */
     bl printf                        /* call to printf */
-    mov r9,#0
+    ldr r9,=init_value
     b enterAndCompare
 
 
@@ -48,6 +51,7 @@ quater:
     ldr r1, address_of_number_read   /* r1 ? &number_read */
     ldr r1, [r1]                     /* r1 ? *r1 */
     bl printf                        /* call to printf */
+    ldr r9,[r9]
     add r9,r9, #25
     cmp r9, #55
     bmi enterAndCompare
@@ -82,8 +86,6 @@ enterAndCompare:
     
     cmp r6, #81
     beq quater
-
-
 
     b end
 
