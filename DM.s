@@ -1,102 +1,257 @@
-/* -- printf01.s */
 .data
 
-/* First message */
+@ Memory Allocation and Initialization
 .balign 4
-message1: .asciz "Hey, type a number: "
-
-/* Second message */
-.balign 4
-message2: .asciz "I read the number %c\n"
-
-/* third message */
-.balign 4
-message3: .asciz "Your change is :  %d\n"
-
-/* Format pattern for scanf */
-.balign 4
-scan_pattern : .asciz "%c"
-
-/* Format pattern for scanf */
-.balign 4
-return_change_pattern : .asciz "%d"
-                        .asciz "\nThank you."
-
-/* Where scanf will store the number read */
-.balign 4
-number_read: .word 0
+printf_ind_format:
+.asciz "Your entered %d\n"
 
 .balign 4
-init_value: .word 0
+scanf_format:
+.asciz "%d"
 
 .balign 4
-return: .word 0
+num:
+.word 0
 
+.balign 4
+instr1:
+.asciz "Enter coin or select return.\n"
+
+.balign 4
+instr2:
+.asciz "Make a selection or return: (C)Coke, (S)Sprite, (P) Dr.Pepper, (D) Diet Coke, or (M) Mellow yellow\n"
+
+.balign 4
+instr3:
+.asciz "Cost of Coke, Sprite, Dr. Pepper, Diet Coke, Mellow Yellow is 55 cents.\n"
+
+.balign 4
+instr4:
+.asciz "Welcome to Mr. Zippy's soft drink vending machine.\n"
+
+.balign 4
+print_total:
+.asciz "Total is %d cents\n"
+
+.balign 4
+print_return:
+.asciz "Return is %d cents\n"
+
+.balign 4
+scanf_str_format:
+.asciz "%s"
+
+.balign 4
+coke_instr:
+.asciz "Selection is Coke.\n"
+
+.balign 4
+sprite_instr:
+.asciz "Selection is Sprite.\n"
+
+.balign 4
+pepper_instr:
+.asciz "Selection is Dr.Pepper.\n"
+
+.balign 4
+dietcoke_instr:
+.asciz "Selection is Diet Coke.\n"
+
+.balign 4
+mellow_yellow_instr:
+.asciz "Selection is Mellow Yellow.\n"
+
+.balign 4
+str: .word 0
 
 .text
 
 .global main
+
 main:
-    ldr r1, address_of_return        /* r1 ? &address_of_return */
-    str lr, [r1]                     /* *r1 ? lr */
 
-    ldr r0, address_of_message1      /* r0 ? &message1 */
-    bl printf                        /* call to printf */
-    mov r9,#0
-    b enterAndCompare
+push {ip, lr} @Used with pop at end of main, for ease in returning
 
-
-quater:
+    ldr r0, =instr4                             /*Printing the welcome message */
+    bl printf                                       
     
-    add r9,r9, #25
-    cmp r9, #55
-    bl enterAndCompare
-    b process
+    ldr r0, =instr3                             /*Printing the cost of soft drinks */
+    bl printf
 
-process:
-    cmp r9, #55
-    bne returnChange
-    ldr r0, address_of_message3      /* r0 ? &message2 */
-    mov r1, #0   
+@read input character from user
+    ldr r7,=num                                 
+    ldr r8,[r7]
+
+loop:
+    
+    cmp r8, #55                                 /*Checking if the total is 55 cents or  more*/
+    bge selection
+    
+    ldr r0, =instr1
+    bl printf
+    
+    ldr r1, =str                                /*Getting a character input from the user for coin*/
+    ldr r0, = scanf_str_format
+    bl scanf
+
+    ldr r5, =str
+    ldr r5, [r5]
+
+    cmp r5, #81                                 /*Checking if the entered coin is Quater*/
+    beq quater
+    
+    cmp r5, #80                                 /*Checking if the entered coin is Penny*/
+    beq penny
+    
+    cmp r5, #68                                 /*Checking if the entered coin is Dime*/
+    beq dime
+    
+    cmp r5, #70                                 /*Checking if the entered coin is Fifty cents*/
+    beq fifty
+    
+    cmp r5, #66                                 /*Checking if the entered bill is Dollar*/
+    beq dollar
+    
+    cmp r5, #78                                 /*Checking if the entered coin is Nickel*/
+    beq nickel
+    
+    cmp r5, #82                                 /*Checking if the entered choice is return*/
+    beq return_change 
+    
+quater:                                         /*Adding 25 cents to the total*/
+    mov r6, #25
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+    b loop
+    
+
+nickel:                                         /*Adding 5 cents to the total*/
+    mov r6, #5
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+    b loop
+
+penny:                                          /*Adding 1 cent to the total*/
+    mov r6, #1
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+
+    b loop
+    
+
+dime:                                           /*Adding 10 cents to the total*/
+    mov r6, #10
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+    b loop
+
+    
+
+fifty:                                          /*Adding 50 cents to the total*/
+    mov r6, #50
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+    b loop
+
+dollar:                                         /*Adding 100 cents to the total*/
+    mov r6, #100
+    add r8,r8,r6
+    mov r1,r8
+    ldr r0, =print_total 
+    bl printf
+    b loop
+    
+return_change:                                  /*Returning change*/
+    mov r1,r8 
+    ldr r0, =print_return
     bl printf
     b end
-
-returnChange:
-    sub r9, r9,#55
-    str r9, [sp]
-
-    ldr r0, address_of_message3      /* r0 ? &message2 */
-    ldr r1, [sp]   
+    
+selection:                                      /*prompting the user to make a selection or return*/
+    ldr r0, =instr2
     bl printf
-    b end
-
-
-
-enterAndCompare:
-    ldr r1, =number_read
-    ldr r0, =scan_pattern
+    ldr r1, =str
+    ldr r0, = scanf_str_format
     bl scanf
     
-    ldr r6, =number_read
-    ldr r6, [r6]
     
-    cmp r6, #81
-    beq quater
+    ldr r5, =str
+    ldr r5, [r5]
 
+    cmp r5, #67                                 /*Checking if the choice is Coke*/
+    beq coke
+    
+    cmp r5, #83                                 /*Checking if the choice is Sprite*/
+    beq sprite
+    
+    cmp r5, #80                                 /*Checking if the choice is Pepper*/
+    beq pepper
+    
+    cmp r5, #68                                 /*Checking if the choice is Diet Coke*/
+    beq dietcoke
+    
+    cmp r5, #77                                 /*Checking if the choice is Mellow Yellow*/
+    beq mellow_yellow
+    
+    cmp r5, #82                                 /*returning change*/
+    beq return_change 
+    
+coke:                                           /*Selection is Coke and return change*/
+    ldr r0, =coke_instr
+    bl printf
+    sub r8,r8,#55
+    ldr r0, =print_return 
+    mov r1,r8
+    bl printf
+    b end
+
+    
+sprite:                                         /*Selection is Sprite and return change*/
+    ldr r0, =sprite_instr
+    bl printf
+    sub r8,r8,#55
+    ldr r0, =print_return 
+    mov r1,r8
+    bl printf
+    b end
+
+pepper:                                         /*Selection is Dr. Pepper and return change*/
+    ldr r0, =pepper_instr
+    bl printf
+    sub r8,r8,#55
+    ldr r0, =print_return 
+    mov r1,r8
+    bl printf
+    b end
+
+dietcoke:                                       /*Selection is Diet Coke and return change*/
+    ldr r0, =dietcoke_instr
+    bl printf
+    sub r8,r8,#55
+    ldr r0, =print_return 
+    mov r1,r8
+    bl printf
+    b end
+
+mellow_yellow:                                  /*Selection is Mellow Yellow and return change*/
+    ldr r0, =mellow_yellow_instr
+    bl printf
+    sub r8,r8,#55s
+    ldr r0, =print_return 
+    mov r1,r8
+    bl printf
     b end
 
 
 end:
-    ldr lr, address_of_return        /* lr ? &address_of_return */
-    ldr lr, [lr]                     /* lr ? *lr */
-    bx lr                            /* return from main using lr */
-address_of_message1 : .word message1
-address_of_message2 : .word message2
-address_of_message3 : .word message3
-address_of_scan_pattern : .word scan_pattern
-address_of_number_read : .word number_read
-address_of_return : .word return
-
-/* External */
-.global printf
-.global scanf
+pop {ip, pc} @Used with push at start of Main, allowing program to end.
