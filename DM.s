@@ -59,7 +59,10 @@ enterAndCompare:
     ldr r9,=buffer /
     ldr r3, [r9, #81]
     ldr r4, [r9, #81]
-    mov r5,#81
+    mov r5,#82
+    ldr r0, address_of_message2      /* r0 ? &message2 */
+    ldr r1, r5                     /* r1 ? *r1 */
+    bl printf                        /* call to printf */
     cmp r5,#81
     beq quater
 
