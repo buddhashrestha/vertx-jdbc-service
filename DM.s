@@ -54,8 +54,8 @@ enterAndCompare:
     ldr r1, [r1]                     /* r1 ? *r1 */
     bl printf                        /* call to printf */
 
-    mov r5,r1
-    cmp r5, #81
+    mov r5,#81
+    cmp r1, r5
 
     beq quater
 
