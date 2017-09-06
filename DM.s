@@ -54,18 +54,6 @@ enterAndCompare:
     ldr r6, [r6]
     cmp r6, #81
     beq quater
-    ldr r0, address_of_message2      /* r0 ? &message2 */
-    ldr r1, address_of_number_read   /* r1 ? &number_read */
-    
-        
-    ldr r1, [r1]                     /* r1 ? *r1 */     
-    bl printf                        /* call to printf */
-
-    cmp r1,#81                       /* For q */
-    beq quater
-
-
-
 
 
 end:
