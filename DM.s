@@ -20,8 +20,7 @@ number_read: .word 0
 .balign 4
 return: .word 0
 
-.balign 4
-buffer: .zero 10 // set up initialized space
+
 .text
 
 .global main
@@ -47,14 +46,15 @@ quater:
 
 
 enterAndCompare:
-    ldr r0, address_of_scan_pattern  /* r0 ? &scan_pattern */      
-    ldr r1, address_of_number_read   /* r1 ? &number_read */       
-    bl scanf                         /* call to scanf */      
-                                    ldr r6, =number_read
-                                    ldr r6, [r6]
-                                    cmp r6, #81
-                                    beq quater
-   /* ldr r0, address_of_message2      /* r0 ? &message2 */
+    ldr r1, =number_read
+    ldr r0, =scan_pattern
+    bl scanf
+    
+    ldr r6, =number_read
+    ldr r6, [r6]
+    cmp r6, #81
+    beq quater
+    ldr r0, address_of_message2      /* r0 ? &message2 */
     ldr r1, address_of_number_read   /* r1 ? &number_read */
     
         
@@ -63,7 +63,7 @@ enterAndCompare:
 
     cmp r1,#81                       /* For q */
     beq quater
-    */
+
 
 
 
