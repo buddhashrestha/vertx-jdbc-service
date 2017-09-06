@@ -9,9 +9,18 @@ message1: .asciz "Hey, type a number: "
 .balign 4
 message2: .asciz "I read the number %c\n"
 
+/* third message */
+.balign 4
+message3: .asciz "Your change is :  %d\n"
+
 /* Format pattern for scanf */
 .balign 4
 scan_pattern : .asciz "%c"
+
+/* Format pattern for scanf */
+.balign 4
+return_change_pattern : .asciz "%d"
+                        .asciz "\nThank you."
 
 /* Where scanf will store the number read */
 .balign 4
@@ -30,6 +39,7 @@ main:
 
     ldr r0, address_of_message1      /* r0 ? &message1 */
     bl printf                        /* call to printf */
+    mov r2,#0
     b enterAndCompare
 
 
@@ -40,7 +50,22 @@ quater:
     bl printf                        /* call to printf */
     add r2,r2, #25
     cmp r2, #55
-    ble enterAndCompare
+    bmi enterAndCompare
+    b process
+
+process:
+    cmp r2, #55
+    bne returnChange
+    ldr r0, address_of_message3      /* r0 ? &message2 */
+    mov r1, #0   
+    bl printf
+    b end
+
+returnChange:
+    sub r2,#55
+    ldr r0, address_of_message3      /* r0 ? &message2 */
+    ldr r1, r2   
+    bl printf
     b end
 
 
@@ -52,8 +77,12 @@ enterAndCompare:
     
     ldr r6, =number_read
     ldr r6, [r6]
+    
     cmp r6, #81
     beq quater
+
+
+
     b end
 
 
